@@ -8,6 +8,11 @@
 
 int main(void)
 {
-	write(1, "_putchar", 8);
+	char txt[] = "_putchar";
+	int c;
+
+	for (c = 0; c < 8; c++)
+		_putchar(txt[c]);
+	_putchar('\n');
 	return (0);
 }
