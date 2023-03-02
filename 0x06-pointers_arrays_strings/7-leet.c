@@ -18,10 +18,10 @@ char *leet(char *str)
 		while (normal[j] != '\0')
 		{
 			if (str[i] == normal[j])
-			{	
+			{
 				str[i] = code[j];
-				j++;
 			}
+			j++;
 		}
 	}
 	return (str);
