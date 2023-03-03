@@ -8,9 +8,7 @@
  */
 char *rot13(char *str)
 {
-	int i, j;
-	char normal[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-	char code[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
+	int i;
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
