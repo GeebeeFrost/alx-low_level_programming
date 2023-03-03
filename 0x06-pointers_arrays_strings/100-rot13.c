@@ -14,7 +14,9 @@ char *rot13(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		for (j = 0; normal[j] != '\0'; j++)
+		for (j = 0; (normal[j] != '\0') &&
+				((str[i] >= 'a' && str[i] <= 'z') ||
+				(str[i] >= 'A' && str[i] <= 'Z')); j++)
 		{
 			if (str[i] == normal[j])
 				str[i] = code[j];
