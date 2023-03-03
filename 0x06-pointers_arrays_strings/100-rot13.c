@@ -14,12 +14,15 @@ char *rot13(char *str)
 
 	for (i = 0; str[i] != '\0'; i++)
 	{
-		for (j = 0; (normal[j] != '\0') &&
-				((str[i] >= 'a' && str[i] <= 'z') ||
-				(str[i] >= 'A' && str[i] <= 'Z')); j++)
+		while ((str[i] >= 'a' && str[i] <= 'z') ||
+				(str[i] >= 'A' && str[i] <= 'Z'))
 		{
-			if (str[i] == normal[j])
-				str[i] = code[j];
+			if ((str[i] >= 'a' && str[i] <= 'm') ||
+					(str[i] >= 'A' && str[i] <= 'M'))
+				str[i] += 13;
+			else
+				str[i] -= 13;
+			i++;
 		}
 	}
 	return (str);
