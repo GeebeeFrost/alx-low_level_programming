@@ -8,21 +8,17 @@
  */
 char *rot13(char *str)
 {
-	int i = 0;
+	int i, j;
+	char normal[] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+	char code[] = "NOPQRSTUVWXYZABCDEFGHIJKLMnopqrstuvwxyzabcdefghijklm";
 
-	while (str[i] != '\0')
+	for (i = 0; str[i] != '\0'; i++)
 	{
-		while ((str[i] >= 'a' && str[i] <= 'z') ||
-				(str[i] >= 'A' && str[i] <= 'Z'))
+		for (j = 0; normal[j] != '\0'; j++)
 		{
-			if ((str[i] >= 'a' && str[i] <= 'm') ||
-					(str[i] >= 'A' && str[i] <= 'M'))
-				str[i] = str[i] + 13;
-			else
-				str[i] = str[i] - 13;
-			i++;
+			if (str[i] == normal[j])
+				str[i] = code[j];
 		}
-		i++;
 	}
 	return (str);
 }
