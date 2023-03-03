@@ -17,7 +17,10 @@ char *rot13(char *str)
 		for (j = 0; normal[j] != '\0'; j++)
 		{
 			if (str[i] == normal[j])
+			{
 				str[i] = code[j];
+				break;
+			}
 		}
 	}
 	return (str);
