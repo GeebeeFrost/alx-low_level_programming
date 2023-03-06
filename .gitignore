@@ -3,3 +3,9 @@
 
 # Folders
 .vscode/
+
+# Executables
+*.exe
+
+# Test files
+main.c
