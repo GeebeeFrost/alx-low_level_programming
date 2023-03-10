@@ -9,3 +9,6 @@
 
 # Test files
 main.c
+
+# Object files
+*.o
