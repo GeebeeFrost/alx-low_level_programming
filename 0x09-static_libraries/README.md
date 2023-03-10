@@ -1,1 +1,1 @@
-Directory created for ALX Static Libraries project
+Directory created for ALX C Static Libraries project
