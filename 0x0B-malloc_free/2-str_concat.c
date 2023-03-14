@@ -40,18 +40,24 @@ char *str_concat(char *s1, char *s2)
 	result = malloc(sizeof(char) * (length + 1));
 	if (result == NULL)
 		return (NULL);
-	i = 0;
-	while (*(s1 + i) != '\0')
+	if (s1 != NULL)
 	{
-		*(result + i) = *(s1 + i);
-		i++;
+		i = 0;
+		while (*(s1 + i) != '\0')
+		{
+			*(result + i) = *(s1 + i);
+			i++;
+		}
 	}
-	j = 0;
-	while (*(s2 + j) != '\0')
+	if (s2 != NULL)
 	{
-		*(result + i) = *(s2 + j);
-		i++;
-		j++;
+		j = 0;
+		while (*(s2 + j) != '\0')
+		{
+			*(result + i) = *(s2 + j);
+			i++;
+			j++;
+		}
 	}
 	return (result);
 }
