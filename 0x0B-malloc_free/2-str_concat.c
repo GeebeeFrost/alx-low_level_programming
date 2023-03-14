@@ -40,9 +40,9 @@ char *str_concat(char *s1, char *s2)
 	result = malloc(sizeof(char) * (length + 1));
 	if (result == NULL)
 		return (NULL);
+	i = 0;
 	if (s1 != NULL)
 	{
-		i = 0;
 		while (*(s1 + i) != '\0')
 		{
 			*(result + i) = *(s1 + i);
