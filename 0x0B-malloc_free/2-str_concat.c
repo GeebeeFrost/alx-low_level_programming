@@ -29,7 +29,9 @@ char *str_concat(char *s1, char *s2)
 	char *result;
 	unsigned int i, j, length;
 
-	if (s1 == NULL)
+	if (s1 == NULL && s2 == NULL)
+		length = 0;
+	else if (s1 == NULL)
 		length = 0 + strilen(s2);
 	else if (s2 == NULL)
 		length = strilen(s1) + 0;
