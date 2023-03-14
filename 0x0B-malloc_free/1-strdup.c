@@ -26,12 +26,9 @@ char *_strdup(char *str)
 	{
 		return (NULL);
 	}
-	i = 0;
-	while (i <= length)
+	for (i = 0; i <= length; i++)
 	{
-		*(ptr + i) = *(str + i);
-		i++;
+		ptr[i] = str[i];
 	}
-	*(ptr + i) = '\0';
 	return (ptr);
 }
