@@ -9,6 +9,7 @@
 
 # Test files
 main.c
+pld*
 
 # Object files
 *.o
