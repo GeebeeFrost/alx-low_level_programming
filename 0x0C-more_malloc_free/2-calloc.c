@@ -11,16 +11,11 @@
 void *_calloc(unsigned int nmemb, unsigned int size)
 {
 	void *result;
-	int i, memb, byts;
 
-	memb = nmemb;
-	byts = size;
-	if (memb == 0 || byts == 0)
+	if (nmemb == 0 || size == 0)
 		return (NULL);
-	result = malloc(byts * memb);
+	result = malloc(size * nmemb);
 	if (result == NULL)
 		return (NULL);
-	for (i = 0; i < memb; i++)
-		result[i] = 0;
 	return (result);
 }
