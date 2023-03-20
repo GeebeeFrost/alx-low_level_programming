@@ -1,1 +1,1 @@
-Repo containing directories for ALX projects
+Directory created for ALX C - Structures, typedef project
