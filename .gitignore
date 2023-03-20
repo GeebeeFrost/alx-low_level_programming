@@ -8,7 +8,7 @@
 *.exe
 
 # Test files
-main.c
+*main.c
 pld*
 
 # Object files
