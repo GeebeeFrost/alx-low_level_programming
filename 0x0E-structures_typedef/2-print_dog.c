@@ -8,7 +8,7 @@
  */
 void print_dog_name(char *name)
 {
-	if (name == NULL)
+	if (!name)
 		printf("Name: (nil)\n");
 	else
 		printf("Name: %s\n", name);
@@ -20,7 +20,10 @@ void print_dog_name(char *name)
  */
 void print_dog_age(float age)
 {
-	printf("Age: %f\n", age);
+	if (!age)
+		printf("Age: %d\n", 0);
+	else
+		printf("Age: %f\n", age);
 }
 
 /**
@@ -29,7 +32,7 @@ void print_dog_age(float age)
  */
 void print_dog_owner(char *owner)
 {
-	if (owner == NULL)
+	if (!owner)
 		printf("Owner: (nil)\n");
 	else
 		printf("Owner: %s\n", owner);
