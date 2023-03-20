@@ -19,5 +19,6 @@ void print_dog(struct dog *);
 void print_dog_name(char *);
 void print_dog_age(float);
 void print_dog_owner(char *);
+dog_t *new_dog(char *, float, char *);
 
 #endif /* DOG */
