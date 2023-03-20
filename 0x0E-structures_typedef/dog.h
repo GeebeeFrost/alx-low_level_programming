@@ -20,5 +20,6 @@ void print_dog_name(char *);
 void print_dog_age(float);
 void print_dog_owner(char *);
 dog_t *new_dog(char *, float, char *);
+void free_dog(dog_t *);
 
 #endif /* DOG */
