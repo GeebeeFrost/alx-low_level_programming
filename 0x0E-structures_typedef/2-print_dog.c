@@ -20,10 +20,7 @@ void print_dog_name(char *name)
  */
 void print_dog_age(float age)
 {
-	if (!age)
-		printf("Age: %d\n", 0);
-	else
-		printf("Age: %f\n", age);
+	printf("Age: %f\n", age);
 }
 
 /**
@@ -44,7 +41,10 @@ void print_dog_owner(char *owner)
  */
 void print_dog(struct dog *d)
 {
-	print_dog_name(d->name);
-	print_dog_age(d->age);
-	print_dog_owner(d->owner);
+	if (d != NULL)
+	{
+		print_dog_name(d->name);
+		print_dog_age(d->age);
+		print_dog_owner(d->owner);
+	}
 }
