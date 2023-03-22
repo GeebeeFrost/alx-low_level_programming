@@ -2,6 +2,7 @@
 #define FUNCTION_POINTERS
 
 int _putchar(char);
-void print_name(char *, void (*f)(char *));
+void print_name(char *, void (*)(char *));
+void array_iterator(int *, unsigned int, void(*)(int));
 
 #endif
