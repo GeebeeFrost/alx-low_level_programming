@@ -1,13 +1,10 @@
-	SECTION .data
-msg:	db "Hello, Holberton", 0
-fmt:	db "%s", 10, 0
-
-	SECTION .text
 	global main
 	extern printf
 main:
-	mov esi, msg
 	mov edi, fmt
+	xor eax, eax
 	mov eax, 0
 	call printf
 	ret
+
+fmt:	db `Hello, Holberton\n`, 0
