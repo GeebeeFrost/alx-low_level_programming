@@ -19,5 +19,6 @@ typedef struct listint_s
 
 int _putchar(char);
 size_t print_listint(const listint_t *);
+size_t listint_len(const listint_t *);
 
 #endif
