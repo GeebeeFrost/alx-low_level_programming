@@ -1,7 +1,7 @@
 #include "lists.h"
 
 /**
- * sum_listint - Returns the sum of all the integers in a 
+ * sum_listint - Returns the sum of all the integers in a
  * linked list of integers
  * @head: Pointer to head node
  *
