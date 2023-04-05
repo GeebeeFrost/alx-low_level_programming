@@ -32,7 +32,7 @@ size_t print_listint_safe(const listint_t *head)
 			slow = slow->next;
 			s_count++;
 		}
-		if (!head)
+		if (head == NULL)
 			exit(98);
 	}
 	return (count);
