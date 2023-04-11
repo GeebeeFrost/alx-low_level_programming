@@ -16,7 +16,7 @@ int power(int base, unsigned int exp)
 	if (base == 0)
 		return (0);
 	if (exp == 0)
-		return (0);
+		return (1);
 	if (exp == 1)
 		return (base);
 	result = base;
