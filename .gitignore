@@ -9,6 +9,7 @@
 
 # Test files
 main.c
+_putchar.c
 pld*
 
 # Object files
