@@ -24,5 +24,6 @@ int create_file(const char *filename, char *text_content)
 	actual_written = write(fd, text_content, length);
 	if (actual_written < 0)
 		return (-1);
+	close(fd);
 	return (1);
 }
