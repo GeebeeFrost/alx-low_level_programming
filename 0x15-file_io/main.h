@@ -9,7 +9,8 @@ int _putchar(char);
 ssize_t read_textfile(const char *, size_t);
 int create_file(const char *, char *);
 int append_text_to_file(const char *, char *);
-char *read_from_file(const char *, size_t);
-int write_to_file(const char *, char *);
+int write_to_file(int, char *);
+void close_fd(int);
+char *create_buffer(size_t);
 
 #endif

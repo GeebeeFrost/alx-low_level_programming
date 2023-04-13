@@ -13,7 +13,9 @@
 int main(int argc, char **argv)
 {
 	char *buffer;
+	int fd_from, fd_to;
 	int writing;
+	ssize_t actual_read;
 
 	if (argc != 3)
 	{
@@ -21,79 +23,46 @@ int main(int argc, char **argv)
 				"Usage: cp file_from file_to\n");
 		exit(97);
 	}
-	buffer = read_from_file(argv[1], 1024);
-	if (!buffer)
-	{
-		dprintf(STDERR_FILENO,
-				"Error: Can't read from file %s\n", argv[1]);
-		exit(98);
-	}
-	writing = write_to_file(argv[2], buffer);
-	if (writing < 0)
-	{
-		dprintf(STDERR_FILENO,
-				"Error: Can't write to %s\n", argv[2]);
-		exit(99);
-	}
+	buffer = create_buffer(1024);
+	fd_from = open(argv[1], O_RDONLY);
+	actual_read = read(fd_from, buffer, 1024);
+	fd_to = open(argv[2], O_CREAT | O_WRONLY | O_TRUNC, 00664);
+	do {
+		if (fd_from < 0 || actual_read < 0)
+		{
+			dprintf(STDERR_FILENO,
+					"Error: Can't read from file %s\n", argv[1]);
+			free(buffer);
+			exit(98);
+		}
+		writing = write_to_file(fd_to, buffer);
+		if (writing < 0)
+		{
+			dprintf(STDERR_FILENO,
+					"Error: Can't write to %s\n", argv[2]);
+			free(buffer);
+			exit(99);
+		}
+		actual_read = read(fd_from, buffer, 1024);
+	} while (actual_read > 0);
 	free(buffer);
+	close_fd(fd_from);
+	close_fd(fd_to);
 	return (0);
 }
 
 /**
- * read_from_file - Reads the content to be copied into a buffer
- * @filename: Name of file to be copied
- * @bytes: Number of bytes to be read from file
- *
- * Return: Buffer containing text to be copied
- * or NULL if there is an error
- */
-char *read_from_file(const char *filename, size_t bytes)
-{
-	int fd, closing;
-	ssize_t actual_read;
-	char *buffer;
-
-	if (filename == NULL)
-		return (NULL);
-	fd = open(filename, O_RDONLY);
-	if (fd < 0)
-		return (NULL);
-	buffer = malloc((sizeof(char) * 1024) + 1);
-	if (!buffer)
-		return (NULL);
-	actual_read = read(fd, buffer, bytes);
-	if (actual_read < 0)
-	{
-		free(buffer);
-		return (NULL);
-	}
-	buffer[actual_read] = '\0';
-	closing = close(fd);
-	if (closing < 0)
-	{
-		dprintf(STDERR_FILENO,
-				"Error: Can't close fd %d\n", fd);
-		free(buffer);
-		exit(100);
-	}
-	return (buffer);
-}
-
-/**
  * write_to_file - Writes text to a file
- * @filename: Name of file
+ * @fd: File descriptor of file to be written to
  * @text_content: Text to be written
  *
  * Return: 1 on success or -1 on failure
  */
-int write_to_file(const char *filename, char *text_content)
+int write_to_file(int fd, char *text_content)
 {
-	int fd, length, closing;
 	ssize_t written;
+	int length;
 
-	if (!filename)
-		return (-1);
-	fd = open(filename, O_CREAT | O_WRONLY | O_TRUNC, 00664);
 	if (fd < 0)
 		return (-1);
 	if (!text_content)
@@ -102,12 +71,41 @@ int write_to_file(const char *filename, char *text_content)
 	written = write(fd, text_content, length);
 	if (written < 0)
 		return (-1);
-	closing = close(fd);
-	if (closing < 0)
+	return (1);
+}
+
+/**
+ * close_fd - Closes a file descriptor
+ * @fd: File descriptor to be closed
+ */
+void close_fd(int fd)
+{
+	int c = close(fd);
+
+	if (c < 0)
 	{
 		dprintf(STDERR_FILENO,
 				"Error: Can't close fd %d\n", fd);
 		exit(100);
 	}
-	return (1);
+}
+
+/**
+ * create_buffer - Creates a buffer to hold content
+ * to be copied
+ * @bytes: Size of buffer in bytes
+ *
+ * Return: Pointer to buffer
+ */
+char *create_buffer(size_t bytes)
+{
+	char *buffer = malloc(sizeof(char) * bytes);
+
+	if (!buffer)
+	{
+		dprintf(STDERR_FILENO,
+				"Error: Not enough space to copy.\n");
+		exit(96);
+	}
+	return (buffer);
 }
