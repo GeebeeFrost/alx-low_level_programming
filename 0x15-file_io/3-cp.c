@@ -1,6 +1,5 @@
 #include "main.h"
 #include <stdio.h>
-#include <string.h>
 #include <stdlib.h>
 
 /**
@@ -35,7 +34,7 @@ int main(int argc, char **argv)
 			free(buffer);
 			exit(98);
 		}
-		writing = write_to_file(fd_to, buffer);
+		writing = write_to_file(fd_to, buffer, actual_read);
 		if (writing < 0)
 		{
 			dprintf(STDERR_FILENO,
@@ -55,20 +54,19 @@ int main(int argc, char **argv)
  * write_to_file - Writes text to a file
  * @fd: File descriptor of file to be written to
  * @text_content: Text to be written
+ * @size: Size of text read
  *
  * Return: 1 on success or -1 on failure
  */
-int write_to_file(int fd, char *text_content)
+int write_to_file(int fd, char *text_content, ssize_t size)
 {
 	ssize_t written;
-	int length;
 
 	if (fd < 0)
 		return (-1);
 	if (!text_content)
 		return (1);
-	length = strlen(text_content);
-	written = write(fd, text_content, length);
+	written = write(fd, text_content, size);
 	if (written < 0)
 		return (-1);
 	return (1);
