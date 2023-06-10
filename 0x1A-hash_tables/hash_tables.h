@@ -38,8 +38,10 @@ unsigned long int key_index(const unsigned char *, unsigned long int);
 int hash_table_set(hash_table_t *, const char *, const char *);
 char *hash_table_get(const hash_table_t *, const char *);
 void hash_table_print(const hash_table_t *);
+void hash_table_delete(hash_table_t *);
 
 hash_node_t *create_item(const char *, const char *);
+void free_hash_ls(hash_node_t *);
 
 
 #endif /* HASH_TABLES_H */
