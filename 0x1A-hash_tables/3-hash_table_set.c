@@ -65,34 +65,3 @@ hash_node_t *create_item(const char *key, const char *value)
 	new->next = NULL;
 	return (new);
 }
-
-/**
- * key_index - generates a hash table index for a key
- * @key: key to generate index for
- * @size: size of the array of the hash table
- *
- * Return: index at which the key/value pair should be stored
- */
-unsigned long int key_index(const unsigned char *key, unsigned long int size)
-{
-	return (hash_djb2(key) % size);
-}
-
-/**
- * hash_djb2 - implementation of the djb2 algorithm
- * @str: string used to generate hash value
- *
- * Return: hash value
- */
-unsigned long int hash_djb2(const unsigned char *str)
-{
-	unsigned long int hash;
-	int c;
-
-	hash = 5381;
-	while ((c = *str++))
-	{
-		hash = ((hash << 5) + hash) + c;
-	}
-	return (hash);
-}
