@@ -26,11 +26,15 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 		ht->array[index] = new;
 		return (1);
 	}
-	if (strcmp(check->key, key) == 0)
+	while (check)
 	{
-		free(check->value);
-		check->value = strdup(value);
-		return (1);
+		if (strcmp(check->key, key) == 0)
+		{
+			free(check->value);
+			check->value = strdup(value);
+			return (1);
+		}
+		check = check->next;
 	}
 	new = create_item(key, value);
 	if (!new)
