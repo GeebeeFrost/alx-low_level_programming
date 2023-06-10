@@ -14,33 +14,35 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	hash_node_t *new, *check, *temp;
 	unsigned long int index;
 
-	new = create_item(key, value);
-	if (!new)
+	if (!ht)
 		return (0);
 	index = key_index((unsigned char *)key, ht->size);
 	check = ht->array[index];
 	if (!check)
-		ht->array[index] = new;
-	else
 	{
-		if (strcmp(check->key, key) == 0)
-		{
-			strcpy(ht->array[index]->value, value);
-		}
-		else
-		{
-			if (!check->next)
-			{
-				check->next = new;
-			}
-			else
-			{
-				temp = check->next;
-				check->next = new;
-				new->next = temp;
-			}
-		}
+		new = create_item(key, value);
+		if (!new)
+			return (0);
+		ht->array[index] = new;
+		return (1);
 	}
+	if (strcmp(check->key, key) == 0)
+	{
+		free(check->value);
+		check->value = strdup(value);
+		return (1);
+	}
+	new = create_item(key, value);
+	if (!new)
+		return (0);
+	if (!check->next)
+	{
+		check->next = new;
+		return (1);
+	}
+	temp = check->next;
+	check->next = new;
+	new->next = temp;
 	return (1);
 }
 
