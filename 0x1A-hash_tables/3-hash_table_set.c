@@ -11,7 +11,7 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *new, *check, *temp;
+	hash_node_t *new, *check;
 	unsigned long int index;
 
 	if (!ht || *key == '\n' || *value == '\n')
