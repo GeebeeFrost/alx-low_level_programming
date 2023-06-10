@@ -39,14 +39,8 @@ int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 	new = create_item(key, value);
 	if (!new)
 		return (0);
-	if (!check->next)
-	{
-		check->next = new;
-		return (1);
-	}
-	temp = check->next;
-	check->next = new;
-	new->next = temp;
+	new->next = ht->array[index];
+	ht->array[index] = new;
 	return (1);
 }
 
